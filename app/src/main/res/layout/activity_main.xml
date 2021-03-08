@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <CheckBox
+        android:id="@+id/enable_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable"/>
+    <TextView
+        android:id="@+id/name_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="my bt name"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan :"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/name_bt"/>
+    <ImageView
+        android:id="@+id/search_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_search"
+        android:padding="5dp"
+        android:layout_below="@+id/scan"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="#3F51B5" />
+    <TextView
+        android:id="@+id/debug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Debug"
+        android:layout_below="@+id/search_bt"
+        android:layout_centerHorizontal="true"/>
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/debug"/>
+
+
+
+
+
+</RelativeLayout>
