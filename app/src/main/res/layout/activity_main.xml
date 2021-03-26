@@ -6,35 +6,82 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:text="ON/OFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/btnONOFF"/>
 
-    <Button
-        android:text="Enable Discoverable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnDiscoverable_on_off"
-        android:onClick="btnEnableDisable_Discoverable"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnFindUnpairedDevices"
-        android:text="Discover"
-        android:onClick="btnDiscover"/>
-
-    <ListView
-        android:layout_below="@+id/btnFindUnpairedDevices"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:id="@+id/lvNewDevices"/>
+        android:layout_height="92dp"
+        android:rotation="180"
+        android:layout_marginTop="-2dp"
+        android:src="@drawable/ic_wave"
+        />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="34dp"
+        android:fontFamily="@font/revalia_regular"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/black"
+        android:text="@string/welcome"
+        />
+
+    <EditText
+        android:id="@+id/email"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_below="@+id/welcome"
+        android:layout_marginTop="30dp"
+        android:inputType="textEmailAddress"
+        android:layout_centerHorizontal="true"
+        android:drawableEnd="@drawable/ic_email"
+        android:hint="E-mail"
+        android:background="@drawable/custom_input"
+
+        />
+
+    <EditText
+        android:id="@+id/password"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_below="@+id/email"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Password"
+        android:drawableEnd="@drawable/ic_lock"
+        android:inputType="textPassword"
+        android:background="@drawable/custom_input"
+        />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_alignEnd="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:text="@string/login"
+        android:background="@drawable/custom_button_filled"
+        />
+
+    <Button
+        android:id="@+id/sign_up"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/sign_up"
+        android:background="@drawable/custom_button_empty"
+
+        />
 
 
 </RelativeLayout>
