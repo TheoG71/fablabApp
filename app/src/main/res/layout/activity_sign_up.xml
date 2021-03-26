@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:rotation="180"
+        android:layout_marginTop="-2dp"
+        android:src="@drawable/ic_wave"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="34dp"
+        android:fontFamily="@font/revalia_regular"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/black"
+        android:text="@string/create"
+        />
+
+    <RelativeLayout
+        android:id="@+id/names"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/title">
+
+        <RelativeLayout
+            android:id="@+id/content_first_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/first_name"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:inputType="textEmailAddress"
+                android:hint="@string/first_name"
+                android:background="@drawable/custom_input"
+                />
+            <TextView
+                android:id="@+id/first_name_err"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textStyle="italic"
+                android:layout_below="@id/first_name"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/content_last_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/content_first_name"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/last_name"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="@string/last_name"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/custom_input"
+                />
+            <TextView
+                android:id="@+id/last_name_err"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/red"
+                android:textStyle="italic"
+                android:layout_below="@id/last_name"
+                />
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/names"
+        android:layout_marginTop="20dp">
+
+        <RelativeLayout
+            android:id="@+id/content_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/email"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email"
+                android:background="@drawable/custom_input"
+                />
+
+            <TextView
+                android:id="@+id/email_err"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textStyle="italic"
+                android:layout_below="@id/email"
+                />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/content_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/content_email"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="@string/password"
+                android:background="@drawable/custom_input"
+                />
+
+            <TextView
+                android:id="@+id/password_err"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textStyle="italic"
+                android:layout_below="@id/password"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/content_password"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="@string/confirm_password"
+                android:background="@drawable/custom_input"
+                />
+
+            <TextView
+                android:id="@+id/confirm_password_err"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textStyle="italic"
+                android:layout_below="@id/confirm_password"
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+    <Button
+        android:id="@+id/create_account"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/create"
+        android:background="@drawable/custom_button_empty"
+
+        />
+
+
+</RelativeLayout>
