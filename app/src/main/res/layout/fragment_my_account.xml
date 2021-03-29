@@ -1,15 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.myAccount.MyAccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center" />
+        android:layout_height="92dp"
+        android:rotation="180"
+        android:layout_marginTop="-2dp"
+        android:src="@drawable/ic_wave"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="34dp"
+        android:fontFamily="@font/revalia_regular"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:textColor="@color/black"
+        android:text="@string/my_account"
+        />
+
+    <RelativeLayout
+        android:id="@+id/content_account_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/account_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/default_pp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="145dp">
+
+        <ImageView
+            android:id="@+id/account_img_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            app:tint="@color/blue"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/content_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp">
+
+        <ImageView
+            android:id="@+id/logout"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_logout"
+            app:tint="@color/red"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/content_form"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/content_account_img"
+        android:layout_marginTop="40dp">
+
+        <RelativeLayout
+            android:id="@+id/content_first_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/first_name"/>
+
+
+            <EditText
+                android:id="@+id/first_name"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/custom_input"
+                android:drawableEnd="@drawable/ic_edit"
+                android:drawableTint="@color/blue"
+                android:layout_below="@id/title_first_name"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/content_last_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/content_first_name">
+
+            <TextView
+                android:id="@+id/title_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/last_name"/>
+
+            <EditText
+                android:id="@+id/last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:background="@drawable/custom_input"
+                android:drawableEnd="@drawable/ic_edit"
+                android:drawableTint="@color/blue"
+                android:layout_below="@id/title_last_name"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/content_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/content_last_name">
+
+
+            <TextView
+                android:id="@+id/title_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/email"/>
+
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:background="@drawable/custom_input"
+                android:drawableEnd="@drawable/ic_edit"
+                android:drawableTint="@color/blue"
+                android:layout_below="@id/title_email"
+                />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/content_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/content_email">
+
+            <TextView
+                android:id="@+id/title_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/password"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:background="@drawable/custom_input"
+                android:drawableEnd="@drawable/ic_edit"
+                android:drawableTint="@color/blue"
+                android:layout_below="@id/title_password"
+                />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/save"
+        android:background="@drawable/custom_button_filled"
+        android:layout_below="@id/content_form"/>
+
+
+</RelativeLayout>
