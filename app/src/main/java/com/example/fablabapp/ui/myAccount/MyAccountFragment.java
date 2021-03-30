@@ -1,6 +1,8 @@
 package com.example.fablabapp.ui.myAccount;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +21,8 @@ public class MyAccountFragment extends Fragment {
 
     private MyAccountViewModel myAccountViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        myAccountViewModel =
-                new ViewModelProvider(this).get(MyAccountViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        myAccountViewModel = new ViewModelProvider(this).get(MyAccountViewModel.class);
         View root = inflater.inflate(R.layout.fragment_booking, container, false);
         final TextView textView = root.findViewById(R.id.text_booking);
         myAccountViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -33,4 +33,5 @@ public class MyAccountFragment extends Fragment {
         });
         return root;
     }
+
 }
