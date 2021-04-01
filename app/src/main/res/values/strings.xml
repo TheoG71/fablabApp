@@ -23,4 +23,11 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="save">Save</string>
+    <string name="my_reservation">My reservation</string>
+    <string name="Starting">Start</string>
+    <string name="Ending">End</string>
+    <string name="address_title">Address : </string>
+    <string name="unlock">Unlock door</string>
+    <string name="connect">Connect</string>
+
 </resources>
