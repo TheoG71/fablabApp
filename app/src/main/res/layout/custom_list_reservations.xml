@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_list_style">
+
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="7dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/thumbnail"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp">
+
+            <TextView
+                android:id="@+id/title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:fontFamily="@font/revalia_regular"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address, city, country"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:layout_below="@id/title_name"/>
+            <TextView
+                android:id="@+id/start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Starting date"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:layout_below="@id/address"/>
+            <TextView
+                android:id="@+id/end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End date"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:layout_toRightOf="@id/start_date"
+                android:layout_below="@id/address"
+                android:layout_marginLeft="5dp"/>
+            <TextView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apartment state"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/blue"
+                android:layout_below="@id/start_date"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
