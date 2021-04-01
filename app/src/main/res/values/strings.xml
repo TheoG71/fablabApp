@@ -4,16 +4,23 @@
     <string name="title_booking">Booking</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_reserve">Reserve</string>
+    <string name="title_apartment">My apartments</string>
+    <string name="title_my_reservations">My reservations</string>
+    <string name="title_my_account">My Account</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_my_account">My Account</string>
+
     <string name="welcome">Hello</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign up</string>
     <string name="create">Create account</string>
+    <string name="my_account">My Account</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="email">E-mail</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="save">Save</string>
 </resources>
