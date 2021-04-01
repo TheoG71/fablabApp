@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/reserveFragment">
+
+    <fragment
+        android:id="@+id/reserveFragment"
+        android:name="com.example.fablabapp.ReserveFragment"
+        android:label="fragment_reserve"
+        tools:layout="@layout/fragment_reserve" />
+    <fragment
+        android:id="@+id/myApartmentsFragment"
+        android:name="com.example.fablabapp.MyApartmentsFragment"
+        android:label="fragment_my_apartments"
+        tools:layout="@layout/fragment_my_apartments" />
+    <fragment
+        android:id="@+id/myReservationsFragment"
+        android:name="com.example.fablabapp.MyReservationsFragment"
+        android:label="fragment_my_reservations"
+        tools:layout="@layout/fragment_my_reservations" />
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.example.fablabapp.ui.myAccount.MyAccountFragment"
+        android:label="fragment_my_account"
+        tools:layout="@layout/fragment_my_account" />
+</navigation>

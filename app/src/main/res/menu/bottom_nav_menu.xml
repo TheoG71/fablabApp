@@ -2,19 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_booking"
-        android:title="@string/title_booking" />
+        android:id="@+id/reserveFragment"
+        android:title="@string/title_reserve"
+        android:icon="@drawable/ic_calendar"/>
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:title="@string/title_dashboard" />
+        android:id="@+id/apartmentFragment"
+        android:title="@string/title_apartment"
+        android:icon="@drawable/ic_apartment"/>
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:title="@string/title_notifications" />
-
+        android:id="@+id/reservationsFragment"
+        android:title="@string/title_my_reservations"
+        android:icon="@drawable/ic_lock"/>
     <item
-        android:id="@+id/navigation_myAcccount"
-        android:title="@string/title_my_account" />
+        android:id="@+id/accountFragment"
+        android:title="@string/title_my_account"
+        android:icon="@drawable/ic_account"/>
 
 </menu>
