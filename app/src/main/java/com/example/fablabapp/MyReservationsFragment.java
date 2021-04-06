@@ -43,7 +43,7 @@ public class MyReservationsFragment extends Fragment {
         // Make loop
 
         arrayList.add(new ReservationsData(
-                Uri.parse("https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_960_720.jpg"),
+                "https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_960_720.jpg",
                 "Paris",
                 "Rue de Rivoli, 75001 Paris",
                 "01/04/2021",
@@ -51,7 +51,7 @@ public class MyReservationsFragment extends Fragment {
                 "Free"));
 
         arrayList.add(new ReservationsData(
-                Uri.parse("https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_960_720.jpg"),
+                "https://pixabay.com/get/ge29a0ea2ec9705b3a7127c2b6b7a134ece23512e9d939c7838456cbaa60d17d5440c7706b43273c41a4c221f54d6e3db85071e0707acb179be32641e4d552752_640.jpg",
                 "Lyon",
                 "Rue de Rivoli, 75001 Paris",
                 "01/04/2021",
@@ -59,7 +59,7 @@ public class MyReservationsFragment extends Fragment {
                 "Free"));
 
         arrayList.add(new ReservationsData(
-                Uri.parse("https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_960_720.jpg"),
+                "https://pixabay.com/get/g048ef316442f9a842ae0cffc459ef68710d90d259d9eee85d195b33b04d4a32421d14774e597e30b54db7087f1ebe9b5cbddaa002bae26b57e4a7225c7ec45bb_640.jpg",
                 "Bordeaux",
                 "Rue de Rivoli, 75001 Paris",
                 "01/04/2021",
@@ -75,7 +75,9 @@ public class MyReservationsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //Drawable thumbnail = ((ImageView) view.findViewById(R.id.thumbnail)).getDrawable();
+
+
+                //String thumbnail = ((View) view.findViewById(R.id.thumbnail));
                 String title_name = ((TextView) view.findViewById(R.id.title_name)).getText().toString();
                 String address = ((TextView) view.findViewById(R.id.address)).getText().toString();
                 String startDate = ((TextView) view.findViewById(R.id.start_date)).getText().toString();
@@ -88,6 +90,7 @@ public class MyReservationsFragment extends Fragment {
                 infoList.add(address);
                 infoList.add(startDate);
                 infoList.add(endDate);
+                //infoList.add(thumbnail);
 
                 Log.d(TAG, infoList.toString());
                 Intent intent = new Intent(getActivity(), ReservationDetailsActivity.class);

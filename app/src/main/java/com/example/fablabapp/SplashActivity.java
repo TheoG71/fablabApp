@@ -31,9 +31,9 @@ public class SplashActivity extends AppCompatActivity {
         app_name = findViewById(R.id.app_name);
         waves = findViewById(R.id.waves);
         bg_waves = findViewById(R.id.bg_waves);
-        content_waves = findViewById(R.id.content_waves);
 
-        content_waves.animate().setDuration(1000).scaleY(3).setStartDelay(2000);
+        bg_waves.animate().setDuration(1000).scaleY(3).setStartDelay(2000);
+        waves.animate().setDuration(1000).translationY(-1000).setStartDelay(2000);
 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
