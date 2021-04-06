@@ -4,14 +4,14 @@ import android.net.Uri;
 
 public class ReservationsData {
 
-    Uri thumbnail;
+    String thumbnail;
     String name = "Wonderful place";
     String address = "Rue de Rivoli, 75001 Paris";
     String start_date = "01 Apr 2021";
     String end_date = "15 Apr 2021";
     String apart_sate = "Free";
 
-    public ReservationsData(Uri thumbnail, String name, String address, String start_date, String end_date, String apart_sate) {
+    public ReservationsData(String thumbnail, String name, String address, String start_date, String end_date, String apart_sate) {
         this.thumbnail = thumbnail;
         this.name = name;
         this.address = address;
@@ -21,11 +21,11 @@ public class ReservationsData {
     }
 
 
-    public Uri getThumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(Uri thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 

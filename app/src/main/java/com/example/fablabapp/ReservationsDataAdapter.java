@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class ReservationsDataAdapter extends ArrayAdapter<ReservationsData> {
@@ -40,7 +42,7 @@ public class ReservationsDataAdapter extends ArrayAdapter<ReservationsData> {
         TextView txtEndDate = convertView.findViewById(R.id.end_date);
         TextView txtApartState = convertView.findViewById(R.id.state);
 
-        imageView.setImageURI(getItem(position).getThumbnail());
+        Picasso.with(getContext()).load(getItem(position).getThumbnail()).into(imageView);
         txtName.setText(getItem(position).getName());
         txtAddress.setText(getItem(position).getAddress());
         txtStartDate.setText(getItem(position).getStart_date());

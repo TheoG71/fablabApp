@@ -152,18 +152,17 @@
         android:layout_below="@id/apart_img"
         android:layout_marginTop="30dp"/>
 
-    <Button
-        android:id="@+id/connect_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="300dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:paddingHorizontal="40dp"
-        android:fontFamily="@font/roboto_regular"
-        android:textSize="18dp"
-        android:text="@string/connect"
-        android:background="@drawable/custom_button_filled"
-        android:layout_below="@id/unlock"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/unlock"
+        android:layout_marginTop="50dp"
+        android:progressDrawable="@drawable/custom_seekbar_track"
+        android:thumb="@drawable/ic_lock"
+        android:max="1"
+        />
 
 
     <ImageView

@@ -34,36 +34,27 @@
         />
     -->
 
-    <RelativeLayout
-        android:id="@+id/content_waves"
+
+
+
+    <ImageView
+        android:id="@id/waves"
         android:layout_width="wrap_content"
-        android:layout_height="1000dp"
-        android:layout_below="@+id/app_name"
-        >
+        android:layout_height="92dp"
+        android:src="@drawable/ic_wave"
+        android:layout_below="@id/app_name"
+        />
 
-
-        <ImageView
-            android:id="@id/waves"
-            android:layout_width="wrap_content"
-            android:layout_height="92dp"
-            android:src="@drawable/ic_wave"
-            />
-
-        <ImageView
-            android:id="@+id/bg_waves"
-            android:layout_width="match_parent"
-            android:layout_height="20000dp"
-            android:layout_marginTop="-10dp"
-            android:layout_below="@+id/waves"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="0dp"
-            android:background="@color/blue"
-            />
-
-
-
-    </RelativeLayout>
-
+    <ImageView
+        android:id="@+id/bg_waves"
+        android:layout_width="match_parent"
+        android:layout_height="20000dp"
+        android:layout_marginTop="-10dp"
+        android:layout_below="@+id/waves"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@color/blue"
+        />
 
 
 </RelativeLayout>
