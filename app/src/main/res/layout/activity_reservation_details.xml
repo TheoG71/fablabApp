@@ -159,9 +159,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/unlock"
         android:layout_marginTop="50dp"
-        android:progressDrawable="@drawable/custom_seekbar_track"
         android:thumb="@drawable/ic_lock"
-        android:max="1"
+        android:progressDrawable="@drawable/custom_progress"
+        android:max="100"
+        android:splitTrack="false"
+        android:progress="10"
+        android:theme="@style/custom_thumb_seekbar"
         />
 
 

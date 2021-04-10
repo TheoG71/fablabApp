@@ -16,6 +16,7 @@ import android.view.contentcapture.ContentCaptureCondition;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -121,6 +122,7 @@ public class ReservationDetailsActivity extends AppCompatActivity {
         TextView end = (TextView) findViewById(R.id.end);
         //ImageView img = (ImageView) findViewById(R.id.thumbnail);
         SeekBar seekBar = (SeekBar)findViewById(R.id.seekbar);
+        final int[] progressChangedValue = {0};
 
 
         name.setText(infoList.get(0));
@@ -132,7 +134,8 @@ public class ReservationDetailsActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (progress == 1){
+                progressChangedValue[0] = progress;
+                if (progress == (seekBar.getMax()-10)){
                     Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
 
                     if(mBluetoothAdapter.isDiscovering()){
@@ -161,10 +164,14 @@ public class ReservationDetailsActivity extends AppCompatActivity {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
+
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+
+                Toast.makeText(ReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0],
+                        Toast.LENGTH_SHORT).show();
 
             }
         });

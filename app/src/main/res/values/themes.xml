@@ -18,5 +18,10 @@
         <item name="colorOnSecondary">@color/transparent</item>
 
     </style>
+    <style name="custom_thumb_seekbar">
+        <item name="android:width">60dp</item>
+        <item name="android:height">60dp</item>
+
+    </style>
 
 </resources>
