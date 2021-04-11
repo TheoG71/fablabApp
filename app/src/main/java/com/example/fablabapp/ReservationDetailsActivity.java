@@ -161,22 +161,15 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-
                             JSONArray tenant_rentals = response.getJSONArray("tenant_rentals");
-
                             for (int i = 0 ; i < tenant_rentals.length(); i++){
-
                                 JSONObject apart = tenant_rentals.getJSONObject(i);
                                 String address = apart.getJSONObject("appartement_id").getString("adress");
-
                                 if (address.equals(infoList.get(1))){
-
                                     start.setText(apart.getString("start_date"));
                                     end.setText(apart.getString("end_date"));
-
                                 }
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -186,7 +179,6 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
-
                     }
                 });
 
