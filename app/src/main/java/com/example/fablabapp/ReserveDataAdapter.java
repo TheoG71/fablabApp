@@ -15,17 +15,16 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ReservationsDataAdapter extends ArrayAdapter<ReservationsData> {
+public class ReserveDataAdapter extends ArrayAdapter<ReserveData> {
 
     private Context mContext;
     private  int mResource;
 
-    public ReservationsDataAdapter(@NonNull Context context, int resource, @NonNull ArrayList<ReservationsData> objects) {
+    public ReserveDataAdapter(@NonNull Context context, int resource, @NonNull ArrayList<ReserveData> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
     }
-
 
 
     @NonNull
@@ -36,11 +35,14 @@ public class ReservationsDataAdapter extends ArrayAdapter<ReservationsData> {
         convertView = layoutInflater.inflate(mResource,parent,false);
 
         ImageView imageView = convertView.findViewById(R.id.thumbnail);
+        TextView txtName = convertView.findViewById(R.id.title_name);
         TextView txtAddress = convertView.findViewById(R.id.address);
-
+        TextView txtApartState = convertView.findViewById(R.id.state);
 
         Picasso.with(getContext()).load(getItem(position).getThumbnail()).into(imageView);
+        txtName.setText(getItem(position).getName());
         txtAddress.setText(getItem(position).getAddress());
+        txtApartState.setText(getItem(position).getApart_sate());
         return convertView;
     }
 

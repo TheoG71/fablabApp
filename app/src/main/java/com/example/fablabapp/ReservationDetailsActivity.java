@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,15 +19,30 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ReservationDetailsActivity extends AppCompatActivity {
 
     String TAG = "From ReservationDetailsActivity";
     BluetoothAdapter mBluetoothAdapter;
     Context context;
+    private RequestQueue mQueue;
+    String public_key;
+    String private_key;
 
 
     public void enableDisableBT(){
@@ -48,6 +64,8 @@ public class ReservationDetailsActivity extends AppCompatActivity {
             IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
             registerReceiver(mBroadcastReceiver1, BTIntent);
         }
+
+
 
     }
 
@@ -85,7 +103,11 @@ public class ReservationDetailsActivity extends AppCompatActivity {
             if (action.equals(BluetoothDevice.ACTION_FOUND)){
                 BluetoothDevice device = intent.getParcelableExtra (BluetoothDevice.EXTRA_DEVICE);
                 // Compare
-                Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
+                if (public_key.equals(device.getName())){
+
+
+                }
+                Log.d(TAG, "New device found : " + device.getName() + ": " + device.getAddress());
             }
         }
     };
@@ -114,28 +136,82 @@ public class ReservationDetailsActivity extends AppCompatActivity {
         }
 
         ArrayList<String> infoList = getIntent().getStringArrayListExtra("infoList");
-        Log.d(TAG, infoList.toString());
 
         TextView name = (TextView) findViewById(R.id.name);
         TextView address = (TextView) findViewById(R.id.address);
         TextView start = (TextView) findViewById(R.id.start);
         TextView end = (TextView) findViewById(R.id.end);
-        //ImageView img = (ImageView) findViewById(R.id.thumbnail);
+        ImageView img = (ImageView) findViewById(R.id.apart_img);
         SeekBar seekBar = (SeekBar)findViewById(R.id.seekbar);
+
         final int[] progressChangedValue = {0};
 
-
-        name.setText(infoList.get(0));
+        Picasso.with(this).load(infoList.get(0)).into(img);
         address.setText(infoList.get(1));
-        start.setText(infoList.get(2));
-        end.setText(infoList.get(3));
-        //Picasso.with(context).load(infoList.get(4)).into(img);
+        int user_id = Integer.parseInt(infoList.get(2));
+        private_key = infoList.get(3);
+        public_key = infoList.get(4);
+
+        mQueue = Volley.newRequestQueue(this);
+
+        // Get all reservation
+        String url ="https://projet-fablab.theo-gustave.fr/api/rental/" + Integer.toString(user_id);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray tenant_rentals = response.getJSONArray("tenant_rentals");
+                            for (int i = 0 ; i < tenant_rentals.length(); i++){
+                                JSONObject apart = tenant_rentals.getJSONObject(i);
+                                String address = apart.getJSONObject("appartement_id").getString("adress");
+                                if (address.equals(infoList.get(1))){
+                                    start.setText(apart.getString("start_date"));
+                                    end.setText(apart.getString("end_date"));
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                    }
+                });
+
+        mQueue.add(jsonObjectRequest);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progressChangedValue[0] = progress;
-                if (progress == (seekBar.getMax()-10)){
+
+                if (progress < 10){
+                    seekBar.setProgress(10);
+
+                }
+                if (progress > 80){
+                    seekBar.setProgress(90);
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                //Toast.makeText(ReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0], Toast.LENGTH_SHORT).show();
+                if (seekBar.getProgress() < 80){
+                    seekBar.setProgress(10);
+                }
+                if (seekBar.getProgress() == 90){
                     Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
 
                     if(mBluetoothAdapter.isDiscovering()){
@@ -159,23 +235,8 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                         registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
                     }
                 }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-                Toast.makeText(ReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0],
-                        Toast.LENGTH_SHORT).show();
 
             }
         });
-
-
     }
 }

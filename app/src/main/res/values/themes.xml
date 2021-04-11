@@ -7,8 +7,10 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue</item>
         <item name="colorOnSecondary">@color/transparent</item>
-
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
+
     <style name="NoNavBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue</item>
@@ -16,12 +18,13 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue</item>
         <item name="colorOnSecondary">@color/transparent</item>
-
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
+
     <style name="custom_thumb_seekbar">
         <item name="android:width">60dp</item>
         <item name="android:height">60dp</item>
-
     </style>
 
 </resources>

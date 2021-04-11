@@ -3,13 +3,15 @@
     <item>
         <shape>
             <size android:height="70dp"/>
-            <corners android:radius="30dp"/>
+            <corners android:radius="40dp"/>
+
             <gradient
                 android:startColor="@color/green"
                 android:centerColor="@color/green"
                 android:centerY="0.9"
                 android:endColor="@color/gray"
                 android:useLevel="true" />
+            <stroke android:color="@color/blue" android:width="3dp"/>
         </shape>
     </item>
 
