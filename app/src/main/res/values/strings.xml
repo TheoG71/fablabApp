@@ -35,7 +35,12 @@
     <string name="my_apartments_list_err">You do not own any apartments at the moment</string>
     <string name="my_reservations_list_err">You do not currently have any bookings</string>
     <string name="reserve_list_err">Connection error please try again later</string>
-
+    <string name="no_match_passwords">Non-matching passwords</string>
+    <string name="correct_email">Please enter a correct email address</string>
+    <string name="enter_password">Please enter your password</string>
+    <string name="enter_firstname">Please enter your Firstname</string>
+    <string name="enter_lastname">Please enter your Lastname</string>
+    <string name="used_email">Email already used</string>
 
 
 </resources>
