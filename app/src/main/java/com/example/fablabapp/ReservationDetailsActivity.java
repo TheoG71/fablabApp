@@ -134,8 +134,31 @@ public class ReservationDetailsActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progressChangedValue[0] = progress;
-                if (progress == (seekBar.getMax()-10)){
+
+                if (progress < 10){
+                    seekBar.setProgress(10);
+
+                }
+                if (progress > 80){
+                    seekBar.setProgress(90);
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                //Toast.makeText(ReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0], Toast.LENGTH_SHORT).show();
+                if (seekBar.getProgress() < 80){
+                    seekBar.setProgress(10);
+                }
+                if (seekBar.getProgress() == 90){
                     Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
 
                     if(mBluetoothAdapter.isDiscovering()){
@@ -159,19 +182,6 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                         registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
                     }
                 }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-                Toast.makeText(ReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0],
-                        Toast.LENGTH_SHORT).show();
 
             }
         });

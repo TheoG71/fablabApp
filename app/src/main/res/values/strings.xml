@@ -29,5 +29,7 @@
     <string name="address_title">Address : </string>
     <string name="unlock">Unlock door</string>
     <string name="connect">Connect</string>
+    <string name="Remember_me">Remember me</string>
+
 
 </resources>

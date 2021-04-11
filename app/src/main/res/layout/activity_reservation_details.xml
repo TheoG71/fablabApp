@@ -154,12 +154,12 @@
 
     <SeekBar
         android:id="@+id/seekbar"
-        android:layout_width="300dp"
         android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/unlock"
-        android:layout_marginTop="50dp"
-        android:thumb="@drawable/ic_lock"
+        android:layout_marginTop="40dp"
+        android:thumb="@drawable/custom_seekbar_thumb"
         android:progressDrawable="@drawable/custom_progress"
         android:max="100"
         android:splitTrack="false"
