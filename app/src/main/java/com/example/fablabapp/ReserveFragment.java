@@ -42,6 +42,7 @@ public class ReserveFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_reserve, container, false);
 
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
+        TextView textView = (TextView) rootView.findViewById(R.id.list_err);
 
         listView.findViewById(R.id.listView);
         ArrayList<ReserveData> arrayList = new ArrayList<>();
@@ -65,6 +66,7 @@ public class ReserveFragment extends Fragment {
                                 JSONObject apartment = response.getJSONObject(i);
                                 int id = apartment.getInt("id");
                                 String address = apartment.getString("adress");
+                                String thumbnail = apartment.getString("picture");
                                 String free = "";
 
                                 JSONArray current_tenant = apartment.getJSONArray("current_tenant");
@@ -81,15 +83,21 @@ public class ReserveFragment extends Fragment {
                                 }
 
                                 arrayList.add(new ReserveData(
-                                        "https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_150.jpg",
+                                        thumbnail,
                                         address,
                                         address,
                                         free));
                             }
 
-                            ReserveDataAdapter reserveDataAdapter = new ReserveDataAdapter(getActivity(), R.layout.custom_list_reserve, arrayList);
+                            if (arrayList.size() > 1){
+                                ReserveDataAdapter reserveDataAdapter = new ReserveDataAdapter(getActivity(), R.layout.custom_list_reserve, arrayList);
 
-                            listView.setAdapter(reserveDataAdapter);
+                                listView.setAdapter(reserveDataAdapter);
+                            }else{
+                                textView.setText(R.string.reserve_list_err);
+                            }
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

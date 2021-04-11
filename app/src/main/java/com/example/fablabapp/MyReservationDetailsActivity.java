@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.util.Log;
 import android.view.contentcapture.ContentCaptureCondition;
 import android.widget.ImageView;
@@ -31,18 +33,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class ReservationDetailsActivity extends AppCompatActivity {
+public class MyReservationDetailsActivity extends AppCompatActivity {
 
-    String TAG = "From ReservationDetailsActivity";
+    String TAG = "From MyReservationDetailsActivity";
     BluetoothAdapter mBluetoothAdapter;
     Context context;
     private RequestQueue mQueue;
     String public_key;
     String private_key;
+    private OutputStream outputStream;
+    private InputStream inStream;
+    boolean door;
 
 
     public void enableDisableBT(){
@@ -105,12 +113,44 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                 // Compare
                 if (public_key.equals(device.getName())){
 
+                    ParcelUuid[] uuid = device.getUuids();
+                    BluetoothSocket socket = null;
+                    try {
+                        socket = device.createRfcommSocketToServiceRecord(uuid[0].getUuid());
+                        socket.connect();
+                        outputStream = socket.getOutputStream();
+                        inStream = socket.getInputStream();
+
+                        String msg_send = "OPEN=" + private_key;
+
+                        outputStream.write(msg_send.getBytes());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                 }
                 Log.d(TAG, "New device found : " + device.getName() + ": " + device.getAddress());
             }
         }
     };
+
+    public void read() {
+        final int BUFFER_SIZE = 1024;
+        byte[] buffer = new byte[BUFFER_SIZE];
+        int bytes = 0;
+        int b = BUFFER_SIZE;
+
+        while (true) {
+            try {
+                bytes = inStream.read(buffer, bytes, BUFFER_SIZE - bytes);
+                Log.d(TAG, "Y'a un truc mais je sais pas quoi ??");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     private void checkBTPermissions() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
@@ -179,6 +219,7 @@ public class ReservationDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
+                        error.printStackTrace();
                     }
                 });
 
@@ -207,11 +248,13 @@ public class ReservationDetailsActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
-                //Toast.makeText(ReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MyReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0], Toast.LENGTH_SHORT).show();
                 if (seekBar.getProgress() < 80){
+                    door = false;
                     seekBar.setProgress(10);
                 }
                 if (seekBar.getProgress() == 90){
+                    door = true;
                     Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
 
                     if(mBluetoothAdapter.isDiscovering()){
