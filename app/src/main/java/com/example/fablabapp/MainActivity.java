@@ -20,29 +20,30 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
+    public boolean rememberCredentials;
+
+    TextView login;
+    Button sign_up;
+    EditText email;
+    EditText password;
+    TextView login_err;
+    CheckBox remember_me;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button login, sign_up;
-        EditText email, password;
-        TextView login_err;
-        CheckBox remember_me;
 
         login = findViewById(R.id.login);
         sign_up = findViewById(R.id.sign_up);
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         remember_me = findViewById(R.id.rememberMe);
 
         // Check if already log
-        //wasUserConnected(login_err);
+        wasUserConnected(login_err);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,24 +62,16 @@ public class MainActivity extends AppCompatActivity {
                 String str_email = email.getText().toString();
                 String str_password = password.getText().toString();
 
-//                String msg_err = checkFields(str_email, str_password);
-//                if (!msg_err.isEmpty()) {
-//                    login_err.setText(msg_err);
-//                } else {
+                String msg_err = checkFields(str_email, str_password);
+                if (!msg_err.isEmpty()) {
+                    login_err.setText(msg_err);
+                } else {
+                    if (remember_me.isChecked()) {
+                        rememberCredentials = true;
+                    }
                     // Call API to check info
                     getUserId(str_email, str_password);
-                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-
-                    if (preferences.getString("id", "") != null) {
-                        if (remember_me.isChecked()) {
-                            pushToSharedPreferences("remember", "true");
-                            pushToSharedPreferences("email", str_email);
-                            pushToSharedPreferences("password", str_password);
-                        }
-                    } else {
-                        login_err.setText(R.string.invalid_email);
-                    }
-//                }
+                }
             }
         });
 
@@ -98,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         String remember = preferences.getString("remember", "");
         Log.d(TAG, "remember : " + remember);
 
-        if (remember == "true") {
+        if (remember.equals("true")) {
             // Check email field
             String str_email = preferences.getString("email", "");
             String str_password = preferences.getString("password", "");
@@ -109,13 +102,8 @@ public class MainActivity extends AppCompatActivity {
             if (!msg_err.isEmpty()) {
                 login_err.setText(msg_err);
             } else {
-                // Call API to check user infos
+                // Call API to check user info
                 getUserId(str_email, str_password);
-
-                if (preferences.getString("id", "") != null) {
-                    launchApp();
-                }
-
             }
         }
     }
@@ -145,12 +133,10 @@ public class MainActivity extends AppCompatActivity {
                         if (response != null) {
                             try {
                                 String userId = response.getString("id");
-                                logUser(userId, password);
+                                logUser(userId, password, email);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        } else {
-                            Log.d(TAG, "Response null");
                         }
                     }
                 },
@@ -158,13 +144,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, error.toString());
+                        login_err.setText(R.string.invalid_email);
                     }
                 }
         );
         requestQueue.add(objectRequest);
     }
 
-    public void logUser(String userId, String password) {
+    public void logUser(String userId, String password, String email) {
         String url = "https://projet-fablab.theo-gustave.fr/api/usercredentials/" + userId + "/" + password;
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -176,8 +163,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             if (response.getBoolean("result")) {
-                                pushToSharedPreferences("id", userId);
+                                if (rememberCredentials) {
+                                    saveUserCredentials(email, password, userId);
+                                }
                                 launchApp();
+                            } else {
+                                login_err.setText(R.string.invalid_password);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -211,6 +202,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(key, value);
         editor.apply();
+    }
+
+    public void saveUserCredentials(String email, String password, String id) {
+        pushToSharedPreferences("remember", "true");
+        pushToSharedPreferences("email", email);
+        pushToSharedPreferences("password", password);
+        pushToSharedPreferences("id", id);
     }
 
     @Override

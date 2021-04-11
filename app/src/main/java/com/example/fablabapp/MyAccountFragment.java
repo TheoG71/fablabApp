@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Objects;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class MyAccountFragment extends Fragment {
@@ -40,10 +42,11 @@ public class MyAccountFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getActivity().getSharedPreferences("checkbox",MODE_PRIVATE);
+                SharedPreferences preferences = requireActivity().getSharedPreferences("checkbox",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("remember", "false");
-                getActivity().finish();
+                editor.apply();
+                requireActivity().finish();
             }
         });
 
