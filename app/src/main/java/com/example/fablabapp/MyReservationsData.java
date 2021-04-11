@@ -2,7 +2,7 @@ package com.example.fablabapp;
 
 import android.net.Uri;
 
-public class ReservationsData {
+public class MyReservationsData {
 
     String thumbnail;
     String address = "Rue de Rivoli, 75001 Paris";
@@ -12,7 +12,7 @@ public class ReservationsData {
 
 
 
-    public ReservationsData(String thumbnail, String address, int apart_id, String public_key, String private_key) {
+    public MyReservationsData(String thumbnail, String address, int apart_id, String public_key, String private_key) {
         this.thumbnail = thumbnail;
         this.address = address;
         this.apart_id = apart_id;

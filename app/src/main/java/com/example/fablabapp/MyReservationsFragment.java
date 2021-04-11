@@ -3,7 +3,6 @@ package com.example.fablabapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -19,7 +17,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -27,12 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -55,9 +47,11 @@ public class MyReservationsFragment extends Fragment {
         String user_id = "2"; //preferences.getString("id","");
 
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
+        TextView textView = (TextView) rootView.findViewById(R.id.list_err);
+
 
         listView.findViewById(R.id.listView);
-        ArrayList<ReservationsData> arrayList = new ArrayList<>();
+        ArrayList<MyReservationsData> arrayList = new ArrayList<>();
 
         mQueue = Volley.newRequestQueue(getContext());
 
@@ -72,6 +66,7 @@ public class MyReservationsFragment extends Fragment {
 
                         try {
                             JSONArray occupied_apartments = response.getJSONArray("occupied_appartments");
+
                             for (int i = 0; i < occupied_apartments.length(); i++){
                                 JSONObject index = occupied_apartments.getJSONObject(i);
                                 String address = index.getString("adress");
@@ -83,19 +78,22 @@ public class MyReservationsFragment extends Fragment {
                                 String private_key = lock.getString("private_key");
 
 
-                                arrayList.add(new ReservationsData(
+                                arrayList.add(new MyReservationsData(
                                         "https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_150.jpg",
                                         address,
                                         apart_id,
                                         public_key,
                                         private_key
                                 ));
+                            }
 
-                                ReservationsDataAdapter reservationsDataAdapter = new ReservationsDataAdapter(getActivity(), R.layout.custom_list_reserve, arrayList);
+                            if (arrayList.size() > 1){
 
-                                listView.setAdapter(reservationsDataAdapter);
+                                MyReservationsDataAdapter myReservationsDataAdapter = new MyReservationsDataAdapter(getActivity(), R.layout.custom_list_reserve, arrayList);
+                                listView.setAdapter(myReservationsDataAdapter);
 
-
+                            }else{
+                                textView.setText(R.string.my_reservations_list_err);
                             }
 
                         } catch (JSONException e) {
@@ -107,8 +105,7 @@ public class MyReservationsFragment extends Fragment {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-
+                        error.printStackTrace();
                     }
                 });
 
@@ -125,7 +122,7 @@ public class MyReservationsFragment extends Fragment {
                 infoList.add(arrayList.get(position).private_key);
                 infoList.add(arrayList.get(position).public_key);
 
-                Intent intent = new Intent(getActivity(), ReservationDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), MyReservationDetailsActivity.class);
                 intent.putStringArrayListExtra("infoList", (ArrayList<String>) infoList);
 
                 startActivity(intent);

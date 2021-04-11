@@ -27,6 +27,19 @@
         android:text="@string/title_my_reservations"
         />
 
+    <TextView
+        android:id="@+id/list_err"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:textStyle="italic"
+        android:text=""
+        android:layout_below="@id/title"
+        />
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="350dp"

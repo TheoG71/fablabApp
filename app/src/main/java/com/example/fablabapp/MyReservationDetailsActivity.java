@@ -40,9 +40,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class ReservationDetailsActivity extends AppCompatActivity {
+public class MyReservationDetailsActivity extends AppCompatActivity {
 
-    String TAG = "From ReservationDetailsActivity";
+    String TAG = "From MyReservationDetailsActivity";
     BluetoothAdapter mBluetoothAdapter;
     Context context;
     private RequestQueue mQueue;
@@ -225,7 +225,7 @@ public class ReservationDetailsActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
+                        error.printStackTrace();
 
                     }
                 });
@@ -255,7 +255,7 @@ public class ReservationDetailsActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
-                //Toast.makeText(ReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MyReservationDetailsActivity.this, "Seek bar progress is :" + progressChangedValue[0], Toast.LENGTH_SHORT).show();
                 if (seekBar.getProgress() < 80){
                     door = false;
                     seekBar.setProgress(10);
