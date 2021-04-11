@@ -30,6 +30,8 @@
     <string name="unlock">Unlock door</string>
     <string name="connect">Connect</string>
     <string name="Remember_me">Remember me</string>
+    <string name="invalid_email">Your email does not match any account, if you do not have an account, please create one.</string>
+    <string name="invalid_password">Wrong password !</string>
 
 
 </resources>
