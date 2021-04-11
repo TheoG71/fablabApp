@@ -1,30 +1,46 @@
 package com.example.fablabapp;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MyReservationsFragment extends Fragment {
 
     String TAG = "From MyReservationFragment";
-    private List<String> infoList;
+    private RequestQueue mQueue;
+    ArrayList<String> infoList = new ArrayList<String>();
 
 
 
@@ -34,65 +50,81 @@ public class MyReservationsFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_my_reservations, container, false);
 
+        SharedPreferences preferences = getActivity().getSharedPreferences("checkbox",MODE_PRIVATE);
+
+        String user_id = "2"; //preferences.getString("id","");
+
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
 
         listView.findViewById(R.id.listView);
         ArrayList<ReservationsData> arrayList = new ArrayList<>();
 
+        mQueue = Volley.newRequestQueue(getContext());
+
         // Get all reservation
-        // Make loop
+        String url ="https://projet-fablab.theo-gustave.fr/api/user/" + user_id;
 
-        arrayList.add(new ReservationsData(
-                "https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_960_720.jpg",
-                "Paris",
-                "Rue de Rivoli, 75001 Paris",
-                "01/04/2021",
-                "15/04/2021",
-                "Free"));
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
-        arrayList.add(new ReservationsData(
-                "https://pixabay.com/get/ge29a0ea2ec9705b3a7127c2b6b7a134ece23512e9d939c7838456cbaa60d17d5440c7706b43273c41a4c221f54d6e3db85071e0707acb179be32641e4d552752_640.jpg",
-                "Lyon",
-                "Rue de Rivoli, 75001 Paris",
-                "01/04/2021",
-                "15/04/2021",
-                "Free"));
+                    @Override
+                    public void onResponse(JSONObject response) {
 
-        arrayList.add(new ReservationsData(
-                "https://pixabay.com/get/g048ef316442f9a842ae0cffc459ef68710d90d259d9eee85d195b33b04d4a32421d14774e597e30b54db7087f1ebe9b5cbddaa002bae26b57e4a7225c7ec45bb_640.jpg",
-                "Bordeaux",
-                "Rue de Rivoli, 75001 Paris",
-                "01/04/2021",
-                "15/04/2021",
-                "Free"));
+                        try {
+                            JSONArray occupied_apartments = response.getJSONArray("occupied_appartments");
+                            for (int i = 0; i < occupied_apartments.length(); i++){
+                                JSONObject index = occupied_apartments.getJSONObject(i);
+                                String address = index.getString("adress");
+                                String latitude = index.getString("latitude");
+                                String longitude = index.getString("longitude");
+                                JSONObject lock = index.getJSONObject("lock_id");
+                                int apart_id = lock.getInt("id");
+                                String public_key = lock.getString("public_key");
+                                String private_key = lock.getString("private_key");
 
-        ReservationsDataAdapter reservationsDataAdapter = new ReservationsDataAdapter(getActivity(), R.layout.custom_list_reservations, arrayList);
 
-        listView.setAdapter(reservationsDataAdapter);
+                                arrayList.add(new ReservationsData(
+                                        "https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_150.jpg",
+                                        address,
+                                        apart_id,
+                                        public_key,
+                                        private_key
+                                ));
+
+                                ReservationsDataAdapter reservationsDataAdapter = new ReservationsDataAdapter(getActivity(), R.layout.custom_list_reserve, arrayList);
+
+                                listView.setAdapter(reservationsDataAdapter);
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+
+                    }
+                });
+
+        mQueue.add(jsonObjectRequest);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                infoList.add(arrayList.get(position).thumbnail);
+                infoList.add(arrayList.get(position).address);
+                infoList.add(Integer.toString(arrayList.get(position).apart_id));
+                infoList.add(arrayList.get(position).private_key);
+                infoList.add(arrayList.get(position).public_key);
 
-
-                //String thumbnail = ((View) view.findViewById(R.id.thumbnail));
-                String title_name = ((TextView) view.findViewById(R.id.title_name)).getText().toString();
-                String address = ((TextView) view.findViewById(R.id.address)).getText().toString();
-                String startDate = ((TextView) view.findViewById(R.id.start_date)).getText().toString();
-                String endDate = ((TextView) view.findViewById(R.id.end_date)).getText().toString();
-                String apartState = ((TextView) view.findViewById(R.id.state)).getText().toString();
-
-                infoList = new ArrayList<String>();
-
-                infoList.add(title_name);
-                infoList.add(address);
-                infoList.add(startDate);
-                infoList.add(endDate);
-                //infoList.add(thumbnail);
-
-                Log.d(TAG, infoList.toString());
                 Intent intent = new Intent(getActivity(), ReservationDetailsActivity.class);
                 intent.putStringArrayListExtra("infoList", (ArrayList<String>) infoList);
 
@@ -104,4 +136,5 @@ public class MyReservationsFragment extends Fragment {
         return rootView;
 
     }
+
 }
