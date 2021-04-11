@@ -94,10 +94,8 @@ public class MainActivity extends AppCompatActivity {
             // Check email field
             String str_email = preferences.getString("email", "");
             String str_password = preferences.getString("password", "");
-            String str_id = preferences.getString("id", "");
 
             String msg_err = checkFields(str_email, str_password);
-
             if (!msg_err.isEmpty()) {
                 login_err.setText(msg_err);
             } else {
@@ -110,12 +108,13 @@ public class MainActivity extends AppCompatActivity {
     private String checkFields(String email, String password) {
         String msg_err = "";
 
-        if (!isEmailValid(email)) {
-            msg_err = "Please enter a correct email address";
-        }
         if (password.isEmpty()) {
             msg_err = "Please enter your password";
         }
+        if (!isEmailValid(email)) {
+            msg_err = "Please enter a correct email address";
+        }
+
         return msg_err;
     }
 
@@ -165,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                                 if (rememberCredentials) {
                                     saveUserCredentials(email, password, userId);
                                 }
+                                pushToSharedPreferences("id", userId);
                                 launchApp();
                             } else {
                                 login_err.setText(R.string.invalid_password);

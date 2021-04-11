@@ -67,11 +67,10 @@ public class MyAccountFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = requireActivity().getSharedPreferences("checkbox",MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("remember", "false");
-                editor.apply();
-                requireActivity().finish();
+                pushToSharedPreferences("remember", "false");
+                pushToSharedPreferences("email", "");
+                pushToSharedPreferences("password", "");
+                pushToSharedPreferences("id", "");
             }
         });
 
@@ -135,7 +134,8 @@ public class MyAccountFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.e(TAG, response.toString());
+                        pushToSharedPreferences("email", email);
+                        pushToSharedPreferences("password", password);
                     }
                 },
                 new Response.ErrorListener() {
@@ -146,5 +146,13 @@ public class MyAccountFragment extends Fragment {
                 }
         );
         requestQueue.add(objectRequest);
+    }
+
+    public void pushToSharedPreferences(String key, String value) {
+        SharedPreferences preferences = requireActivity().getSharedPreferences("checkbox", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.apply();
+        requireActivity().finish();
     }
 }

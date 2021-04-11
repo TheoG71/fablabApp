@@ -40,7 +40,7 @@
         android:drawableEnd="@drawable/ic_email"
         android:hint="@string/email"
         android:background="@drawable/custom_input"
-
+        android:maxLines="1"
         />
 
 
@@ -63,6 +63,7 @@
             android:drawableEnd="@drawable/ic_lock"
             android:inputType="textPassword"
             android:background="@drawable/custom_input"
+            android:maxLines="1"
             />
 
         <TextView

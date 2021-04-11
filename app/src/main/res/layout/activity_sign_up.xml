@@ -46,9 +46,10 @@
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:inputType="textEmailAddress"
                 android:hint="@string/first_name"
                 android:background="@drawable/custom_input"
+                android:maxLines="1"
+                android:inputType="text"
                 />
             <TextView
                 android:id="@+id/first_name_err"
@@ -77,6 +78,8 @@
                 android:hint="@string/last_name"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/custom_input"
+                android:maxLines="1"
+                android:inputType="text"
                 />
             <TextView
                 android:id="@+id/last_name_err"
@@ -112,9 +115,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:inputType="textEmailAddress"
                 android:hint="@string/email"
                 android:background="@drawable/custom_input"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
                 />
 
             <TextView
@@ -146,6 +150,8 @@
                 android:fontFamily="@font/roboto_regular"
                 android:hint="@string/password"
                 android:background="@drawable/custom_input"
+                android:maxLines="1"
+                android:inputType="textPassword"
                 />
 
             <TextView
@@ -175,6 +181,8 @@
                 android:fontFamily="@font/roboto_regular"
                 android:hint="@string/confirm_password"
                 android:background="@drawable/custom_input"
+                android:maxLines="1"
+                android:inputType="textPassword"
                 />
 
             <TextView
