@@ -24,11 +24,15 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class MyAccountFragment extends Fragment {
+    public static final String TAG = "MainActivity";
+
     ImageView account_img, logout;
     EditText first_name,last_name,email,password;
     Button save;
@@ -53,6 +57,12 @@ public class MyAccountFragment extends Fragment {
         String userId = preferences.getString("id", "");
         getUserData(userId);
 
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                password.setText("");
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +72,13 @@ public class MyAccountFragment extends Fragment {
                 editor.putString("remember", "false");
                 editor.apply();
                 requireActivity().finish();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateUserData(userId, email.getText().toString(), first_name.getText().toString(), last_name.getText().toString(), password.getText().toString());
             }
         });
 
@@ -91,6 +108,34 @@ public class MyAccountFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //TO DO HANDLE ERROR
+                    }
+                }
+        );
+        requestQueue.add(objectRequest);
+    }
+
+    public void updateUserData(String userId, String email, String firstname, String lastname, String password) {
+        String url = "https://projet-fablab.theo-gustave.fr/api/user/update/" + userId;
+        RequestQueue requestQueue = Volley.newRequestQueue(requireActivity());
+        Map<String, String> postParams = new HashMap<String, String>();
+        postParams.put("email", email);
+        postParams.put("firstname", firstname);
+        postParams.put("lastname", lastname);
+        postParams.put("password", password);
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                new JSONObject(postParams),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e(TAG, response.toString());
                     }
                 },
                 new Response.ErrorListener() {

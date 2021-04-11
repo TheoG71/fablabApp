@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     private void wasUserConnected(TextView login_err) {
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         String remember = preferences.getString("remember", "");
-        Log.d(TAG, "remember : " + remember);
 
         if (remember.equals("true")) {
             // Check email field
