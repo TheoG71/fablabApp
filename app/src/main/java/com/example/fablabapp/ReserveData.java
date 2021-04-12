@@ -2,19 +2,27 @@ package com.example.fablabapp;
 
 public class ReserveData {
 
+
+
+    String id;
     String thumbnail;
-    String name = "Wonderful place";
     String address = "Rue de Rivoli, 75001 Paris";
     String apart_sate = "Free";
 
-    public ReserveData(String thumbnail, String name, String address, String apart_sate) {
+    public ReserveData(String id, String thumbnail, String address, String apart_sate) {
+        this.id = id;
         this.thumbnail = thumbnail;
-        this.name = name;
         this.address = address;
-
         this.apart_sate = apart_sate;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getThumbnail() {
         return thumbnail;
@@ -22,14 +30,6 @@ public class ReserveData {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getAddress() {
@@ -47,4 +47,8 @@ public class ReserveData {
     public void setApart_sate(String apart_sate) {
         this.apart_sate = apart_sate;
     }
+
+
+
+
 }

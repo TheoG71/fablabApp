@@ -127,13 +127,10 @@ public class MyApartmentsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //String thumbnail = ((View) view.findViewById(R.id.thumbnail));
-                String title_name = ((TextView) view.findViewById(R.id.title_name)).getText().toString();
                 String address = ((TextView) view.findViewById(R.id.address)).getText().toString();
                 String apartState = ((TextView) view.findViewById(R.id.state)).getText().toString();
 
                 myApartDetailsList = new ArrayList<String>();
-
-                myApartDetailsList.add(title_name);
                 myApartDetailsList.add(address);
                 //myApartDetailsList.add(thumbnail);
 

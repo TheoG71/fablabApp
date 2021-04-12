@@ -33,7 +33,8 @@ public class ReserveFragment extends Fragment {
 
     String TAG = "From MyReservationFragment";
     private List<String> apartDetailsList;
-    private  RequestQueue mQueue;
+
+    private RequestQueue mQueue;
 
 
     @Nullable
@@ -43,15 +44,15 @@ public class ReserveFragment extends Fragment {
 
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
         TextView textView = (TextView) rootView.findViewById(R.id.list_err);
-
         listView.findViewById(R.id.listView);
+
+
         ArrayList<ReserveData> arrayList = new ArrayList<>();
 
         mQueue = Volley.newRequestQueue(getContext());
 
         // Get all reservation
-        String url ="https://projet-fablab.theo-gustave.fr/api/appartments";
-        Log.e(TAG,"ALLO");
+        String url = "https://projet-fablab.theo-gustave.fr/api/appartments";
 
         JsonArrayRequest request = new JsonArrayRequest(url,
                 new Response.Listener<JSONArray>() {
@@ -62,51 +63,50 @@ public class ReserveFragment extends Fragment {
 
                         try {
 
-                            for (int i = 0; i < response.length(); i++){
+                            for (int i = 0; i < response.length(); i++) {
                                 JSONObject apartment = response.getJSONObject(i);
-                                int id = apartment.getInt("id");
+                                String id = String.valueOf(apartment.getInt("id"));
                                 String address = apartment.getString("adress");
                                 String thumbnail = apartment.getString("picture");
                                 String free = "";
 
                                 JSONArray current_tenant = apartment.getJSONArray("current_tenant");
 
-                                if (current_tenant.length() < 1){
+                                if (current_tenant.length() < 1) {
                                     free = "Free";
-                                    Log.e(TAG, "id : " + Integer.toString(id) + " address : " + address + " Free : " + free);
-                                }else {
+                                    Log.e(TAG, "id : " + id + " address : " + address + " Free : " + free);
+                                } else {
                                     free = "Not Free";
                                     JSONArray current_tenant_obj = apartment.getJSONArray("current_tenant");
                                     JSONObject current_tenant_index = current_tenant_obj.getJSONObject(0);
                                     int current_tenant_id = current_tenant_index.getInt("id");
-                                    Log.e(TAG, "id : " + Integer.toString(id) + " address : " + address + " Free : " + free + " current_tenant : " + current_tenant_id);
+                                    Log.e(TAG, "id : " +  id + " address : " + address + " Free : " + free + " current_tenant : " + current_tenant_id);
                                 }
 
                                 arrayList.add(new ReserveData(
+                                        id,
                                         thumbnail,
                                         address,
-                                        address,
                                         free));
+
                             }
 
-                            if (arrayList.size() > 1){
-                                ReserveDataAdapter reserveDataAdapter = new ReserveDataAdapter(getActivity(), R.layout.custom_list_reserve, arrayList);
+                            if (arrayList.size() > 1) {
 
+                                ReserveDataAdapter reserveDataAdapter = new ReserveDataAdapter(getActivity(), R.layout.custom_list_reserve, arrayList);
                                 listView.setAdapter(reserveDataAdapter);
-                            }else{
+                            } else {
                                 textView.setText(R.string.reserve_list_err);
                             }
-
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                                            }
+                    }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                error.printStackTrace();
             }
         });
 
@@ -116,20 +116,16 @@ public class ReserveFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //String thumbnail = ((View) view.findViewById(R.id.thumbnail));
-                String title_name = ((TextView) view.findViewById(R.id.title_name)).getText().toString();
-                String address = ((TextView) view.findViewById(R.id.address)).getText().toString();
-                String apartState = ((TextView) view.findViewById(R.id.state)).getText().toString();
-
                 apartDetailsList = new ArrayList<String>();
 
-                apartDetailsList.add(title_name);
-                apartDetailsList.add(address);
-                //infoList.add(thumbnail);
+                apartDetailsList.add(arrayList.get(position).id);
+                apartDetailsList.add(arrayList.get(position).address);
+                apartDetailsList.add(arrayList.get(position).apart_sate);
+                apartDetailsList.add(arrayList.get(position).thumbnail);
 
-                Log.d(TAG, apartDetailsList.toString());
+
                 Intent intent = new Intent(getActivity(), ApartmentDetailsActivity.class);
-                intent.putStringArrayListExtra("infoList", (ArrayList<String>) apartDetailsList);
+                intent.putStringArrayListExtra("apartDetailsList", (ArrayList<String>) apartDetailsList);
 
                 startActivity(intent);
 
