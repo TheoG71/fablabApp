@@ -49,6 +49,7 @@
         android:layout_centerHorizontal="true"
         android:divider="@null"
         android:dividerHeight="0dp"
+        android:paddingBottom="60dp"
         />
 
 

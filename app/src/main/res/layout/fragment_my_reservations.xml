@@ -43,12 +43,13 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/title"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:divider="@null"
         android:dividerHeight="0dp"
+        android:paddingBottom="60dp"
         />
 
 
