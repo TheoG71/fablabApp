@@ -39,8 +39,11 @@
     <string name="alert_title">Booking complete</string>
     <string name="alert_msg">Thank for booking</string>
     <string name="title_apart_details">Apartment details</string>
-
-
-
+    <string name="no_match_passwords">Non-matching passwords</string>
+    <string name="correct_email">Please enter a correct email address</string>
+    <string name="enter_password">Please enter your password</string>
+    <string name="enter_firstname">Please enter your Firstname</string>
+    <string name="enter_lastname">Please enter your Lastname</string>
+    <string name="used_email">Email already used</string>
 
 </resources>
