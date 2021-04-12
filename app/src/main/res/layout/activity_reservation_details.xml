@@ -19,25 +19,14 @@
         android:text="@string/my_reservation"
         />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:fontFamily="@font/roboto_regular"
-        android:textSize="20dp"
-        android:layout_below="@+id/title"
-        android:layout_marginTop="30dp"/>
-
 
     <RelativeLayout
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/name"
-        android:layout_marginTop="30dp">
+        android:layout_below="@id/title"
+        android:layout_marginTop="70dp">
 
 
         <RelativeLayout
@@ -97,13 +86,16 @@
 
         </RelativeLayout>
 
+    </RelativeLayout>
+
+
 
         <RelativeLayout
             android:id="@+id/address_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/start_content"
+            android:layout_below="@+id/content"
             android:layout_marginTop="75dp">
 
             <TextView
@@ -123,9 +115,6 @@
                 android:fontFamily="@font/roboto_regular"
                 android:textSize="20dp"
                 android:textColor="@color/black"/>
-
-
-        </RelativeLayout>
 
 
     </RelativeLayout>
@@ -151,20 +140,6 @@
         android:layout_below="@id/apart_img"
         android:layout_marginTop="30dp"/>
 
-<!--    <SeekBar-->
-<!--        android:id="@+id/seekbar"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_width="150dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/unlock"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:thumb="@drawable/custom_seekbar_thumb"-->
-<!--        android:progressDrawable="@drawable/custom_progress"-->
-<!--        android:max="100"-->
-<!--        android:splitTrack="false"-->
-<!--        android:progress="10"-->
-<!--        android:theme="@style/custom_thumb_seekbar"-->
-<!--        />-->
     <Switch
         android:id="@+id/Switch"
         android:layout_width="wrap_content"

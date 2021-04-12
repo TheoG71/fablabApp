@@ -73,12 +73,10 @@ public class MyReservationDetailsActivity extends AppCompatActivity {
 
         ArrayList<String> infoList = getIntent().getStringArrayListExtra("infoList");
 
-        name = (TextView) findViewById(R.id.name);
         address = (TextView) findViewById(R.id.address);
         start = (TextView) findViewById(R.id.start);
         end = (TextView) findViewById(R.id.end);
         img = (ImageView) findViewById(R.id.apart_img);
-//        SeekBar seekBar = (SeekBar)findViewById(R.id.seekbar);
         new_switch = (Switch) findViewById(R.id.Switch);
         new_switch.setVisibility(View.INVISIBLE);
         connectButton = (Button) findViewById(R.id.ButtonConnect);
@@ -154,8 +152,8 @@ public class MyReservationDetailsActivity extends AppCompatActivity {
                                 JSONObject apart = tenant_rentals.getJSONObject(i);
                                 String address = apart.getJSONObject("appartement_id").getString("adress");
                                 if (address.equals(infoList.get(1))){
-                                    start.setText(apart.getString("start_date").substring(0,9));
-                                    end.setText(apart.getString("end_date").substring(0,9));
+                                    start.setText(apart.getString("start_date").substring(0,10));
+                                    end.setText(apart.getString("end_date").substring(0,10));
                                 }
                             }
                         } catch (JSONException e) {

@@ -14,8 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FablabApp">
-        <activity android:name=".MyApartmentsDetailsActivity"></activity>
-        <activity android:name=".ApartmentDetailsActivity" />
+        <activity
+            android:name=".ApartmentDetailsActivity"
+            android:theme="@style/NoNavBar"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/NoNavBar">

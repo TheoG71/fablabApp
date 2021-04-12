@@ -3,6 +3,7 @@ package com.example.fablabapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,7 @@ public class MyReservationsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_my_reservations, container, false);
 
         SharedPreferences preferences = getActivity().getSharedPreferences("checkbox",MODE_PRIVATE);
-        String user_id = "2"; //preferences.getString("id","");
+        String user_id = preferences.getString("id","");
 
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
         TextView textView = (TextView) rootView.findViewById(R.id.list_err);
@@ -49,31 +50,37 @@ public class MyReservationsFragment extends Fragment {
 
         mQueue = Volley.newRequestQueue(getContext());
         // Get all reservation
-        String url ="https://projet-fablab.theo-gustave.fr/api/user/" + user_id;
+        String url ="https://projet-fablab.theo-gustave.fr/api/rental/" + user_id;
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray occupied_apartments = response.getJSONArray("occupied_appartments");
-                            for (int i = 0; i < occupied_apartments.length(); i++){
-                                JSONObject index = occupied_apartments.getJSONObject(i);
-                                String address = index.getString("adress");
-                                String latitude = index.getString("latitude");
-                                String longitude = index.getString("longitude");
-                                JSONObject lock = index.getJSONObject("lock_id");
-                                int apart_id = lock.getInt("id");
+                            JSONArray tenant_rentals = response.getJSONArray("tenant_rentals");
+
+                            for (int i = 0; i < tenant_rentals.length(); i++){
+                                JSONObject index = tenant_rentals.getJSONObject(i);
+                                JSONObject apart = index.getJSONObject("appartement_id");
+
+                                String address = apart.getString("adress");
+                                int apart_id = apart.getInt("id");
+                                String thumbnail = apart.getString("picture");
+
+                                JSONObject lock = apart.getJSONObject("lock_id");
                                 String public_key = lock.getString("public_key");
                                 String private_key = lock.getString("private_key");
                                 arrayList.add(new MyReservationsData(
-                                        "https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_150.jpg",
+                                        thumbnail,
                                         address,
                                         apart_id,
                                         public_key,
                                         private_key
                                 ));
+
                             }
-                            if (arrayList.size() > 1){
+
+                            if (arrayList.size() >= 1){
                                 MyReservationsDataAdapter myReservationsDataAdapter = new MyReservationsDataAdapter(getActivity(), R.layout.custom_list_reserve, arrayList);
                                 listView.setAdapter(myReservationsDataAdapter);
                             }else{
