@@ -35,6 +35,11 @@
     <string name="my_apartments_list_err">You do not own any apartments at the moment</string>
     <string name="my_reservations_list_err">You do not currently have any bookings</string>
     <string name="reserve_list_err">Connection error please try again later</string>
+    <string name="reserve">Reserve</string>
+    <string name="alert_title">Booking complete</string>
+    <string name="alert_msg">Thank for booking</string>
+    <string name="title_apart_details">Apartment details</string>
+
 
 
 

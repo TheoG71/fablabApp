@@ -6,9 +6,143 @@
     android:layout_height="match_parent"
     tools:context=".ApartmentDetailsActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:rotation="180"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/ic_wave"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="34dp"
+        android:fontFamily="@font/revalia_regular"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:textColor="@color/black"
+        android:text="@string/title_apart_details"
+        />
 
 
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/title"
+        android:layout_marginTop="30dp">
 
 
+        <RelativeLayout
+            android:id="@+id/start_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp">
+
+            <TextView
+                android:id="@+id/start_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/Starting"
+                android:fontFamily="@font/revalia_regular"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="100dp"
+                android:textAlignment="center"
+                android:textSize="24dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/blue"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/start_title"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/end_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/start_content"
+            android:layout_marginLeft="50dp">
+
+            <TextView
+                android:id="@+id/end_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/Ending"
+                android:fontFamily="@font/revalia_regular"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/end"
+                android:layout_width="100dp"
+                android:textAlignment="center"
+                android:textSize="24dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/blue"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/end_title"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/address_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/content"
+            android:layout_marginTop="75dp">
+
+            <TextView
+                android:id="@+id/address_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address_title"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/address_title"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+
+        </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/apart_img"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/content"
+        android:layout_marginTop="30dp"
+        android:scaleType="centerCrop"/>
+
+    <Button
+        android:id="@+id/reserve"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/apart_img"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/custom_button_filled"
+        android:text="@string/reserve"/>
 
 </RelativeLayout>

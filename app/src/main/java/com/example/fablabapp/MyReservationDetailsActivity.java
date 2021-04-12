@@ -177,7 +177,6 @@ public class MyReservationDetailsActivity extends AppCompatActivity {
 
         ArrayList<String> infoList = getIntent().getStringArrayListExtra("infoList");
 
-        TextView name = (TextView) findViewById(R.id.name);
         TextView address = (TextView) findViewById(R.id.address);
         TextView start = (TextView) findViewById(R.id.start);
         TextView end = (TextView) findViewById(R.id.end);
