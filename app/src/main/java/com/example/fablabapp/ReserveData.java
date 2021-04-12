@@ -5,7 +5,7 @@ public class ReserveData {
 
 
     String id;
-    String thumbnail;
+    String thumbnail = "";
     String address = "Rue de Rivoli, 75001 Paris";
     String apart_sate = "Free";
 

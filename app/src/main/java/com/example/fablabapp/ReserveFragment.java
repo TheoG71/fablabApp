@@ -70,11 +70,13 @@ public class ReserveFragment extends Fragment {
                                 String thumbnail = apartment.getString("picture");
                                 String free = "";
 
+
+
                                 JSONArray current_tenant = apartment.getJSONArray("current_tenant");
 
                                 if (current_tenant.length() < 1) {
                                     free = "Free";
-                                    Log.e(TAG, "id : " + id + " address : " + address + " Free : " + free);
+                                    Log.e(TAG, "id : " + id + " address : " + address + " Free : " + free + " Picture : " + thumbnail);
                                 } else {
                                     free = "Not Free";
                                     JSONArray current_tenant_obj = apartment.getJSONArray("current_tenant");

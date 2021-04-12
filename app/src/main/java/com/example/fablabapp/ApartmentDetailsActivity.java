@@ -136,7 +136,7 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
 
                 month = month + 1;
                 String date = makeDateString(day, month, year);
-                start.setText(date);
+                end.setText(date);
             }
         };
 

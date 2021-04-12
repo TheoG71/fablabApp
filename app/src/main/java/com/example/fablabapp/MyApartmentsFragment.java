@@ -48,7 +48,7 @@ public class MyApartmentsFragment extends Fragment {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("checkbox",MODE_PRIVATE);
 
-        int user_id = 2; //preferences.getString("id","");
+        String user_id = preferences.getString("id","");
 
         listView.findViewById(R.id.listView);
         ArrayList<MyApartmentsData> arrayList = new ArrayList<>();
@@ -90,7 +90,7 @@ public class MyApartmentsFragment extends Fragment {
                                 JSONArray landlord = apartment.getJSONArray("landlord");
                                 int landlord_id = landlord.getJSONObject(0).getInt("id");
 
-                                if (landlord_id == user_id){
+                                if (landlord_id == Integer.valueOf(user_id)){
 
                                     arrayList.add(new MyApartmentsData(
                                             thumbnail,
@@ -126,19 +126,6 @@ public class MyApartmentsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //String thumbnail = ((View) view.findViewById(R.id.thumbnail));
-                String address = ((TextView) view.findViewById(R.id.address)).getText().toString();
-                String apartState = ((TextView) view.findViewById(R.id.state)).getText().toString();
-
-                myApartDetailsList = new ArrayList<String>();
-                myApartDetailsList.add(address);
-                //myApartDetailsList.add(thumbnail);
-
-                Log.d(TAG, myApartDetailsList.toString());
-                Intent intent = new Intent(getActivity(), MyApartmentsDetailsActivity.class);
-                intent.putStringArrayListExtra("myApartDetailsList", (ArrayList<String>) myApartDetailsList);
-
-                startActivity(intent);
 
             }
         });
