@@ -45,5 +45,6 @@
     <string name="enter_firstname">Please enter your Firstname</string>
     <string name="enter_lastname">Please enter your Lastname</string>
     <string name="used_email">Email already used</string>
+    <string name="bottom_wave">bottom_wave</string>
 
 </resources>
