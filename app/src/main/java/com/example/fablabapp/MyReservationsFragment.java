@@ -31,8 +31,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MyReservationsFragment extends Fragment {
     String TAG = "From MyReservationFragment";
-    private RequestQueue mQueue;
+    ArrayList<MyReservationsData> arrayList = new ArrayList<>();
     ArrayList<String> infoList = new ArrayList<String>();
+
+    ListView listView;
+    TextView textView;
 
     @Nullable
     @Override
@@ -42,13 +45,33 @@ public class MyReservationsFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("checkbox",MODE_PRIVATE);
         String user_id = preferences.getString("id","");
 
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
-        TextView textView = (TextView) rootView.findViewById(R.id.list_err);
+        listView = (ListView) rootView.findViewById(R.id.listView);
+        textView = (TextView) rootView.findViewById(R.id.list_err);
         listView.findViewById(R.id.listView);
 
-        ArrayList<MyReservationsData> arrayList = new ArrayList<>();
+        getReservations(arrayList, user_id);
 
-        mQueue = Volley.newRequestQueue(getContext());
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                infoList.add(arrayList.get(position).thumbnail);
+                infoList.add(arrayList.get(position).address);
+                infoList.add(Integer.toString(arrayList.get(position).apart_id));
+                infoList.add(arrayList.get(position).private_key);
+                infoList.add(arrayList.get(position).public_key);
+
+                Intent intent = new Intent(getActivity(), MyReservationDetailsActivity.class);
+                intent.putStringArrayListExtra("infoList", (ArrayList<String>) infoList);
+
+                startActivity(intent);
+            }
+        });
+
+        return rootView;
+    }
+
+    private void getReservations(ArrayList<MyReservationsData> arrayList, String user_id) {
+        RequestQueue mQueue = Volley.newRequestQueue(getContext());
         // Get all reservation
         String url ="https://projet-fablab.theo-gustave.fr/api/rental/" + user_id;
 
@@ -97,23 +120,5 @@ public class MyReservationsFragment extends Fragment {
                     }
                 });
         mQueue.add(jsonObjectRequest);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                infoList.add(arrayList.get(position).thumbnail);
-                infoList.add(arrayList.get(position).address);
-                infoList.add(Integer.toString(arrayList.get(position).apart_id));
-                infoList.add(arrayList.get(position).private_key);
-                infoList.add(arrayList.get(position).public_key);
-
-                Intent intent = new Intent(getActivity(), MyReservationDetailsActivity.class);
-                intent.putStringArrayListExtra("infoList", (ArrayList<String>) infoList);
-
-                startActivity(intent);
-            }
-        });
-
-        return rootView;
     }
 }
