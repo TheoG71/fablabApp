@@ -16,12 +16,7 @@ public class ApartmentDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apartment_details);
 
-
         ArrayList<String> apartDetailsList = getIntent().getStringArrayListExtra("apartDetailsList");
         Log.d(TAG, apartDetailsList.toString());
-
-
-
-
     }
 }
